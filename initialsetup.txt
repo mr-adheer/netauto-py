@@ -33,3 +33,19 @@ source .venv/bin/activate
 # pip also pulls in what Netmiko needs, such as paramiko for SSH.
 
 pip install netmiko
+
+# ===========================================================================================================================================
+# Git initialize command and push
+git status
+git --version
+git init
+touch .gitignore
+nano .gitignore
+git status
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/mr-adheer/netauto-py.git
+git push --set-upstream origin master
+#
+#
+# ===========================================================================================================================================
