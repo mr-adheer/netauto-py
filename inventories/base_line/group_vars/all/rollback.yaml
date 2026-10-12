@@ -1,0 +1,27 @@
+---
+# =============================================================================
+# group_vars/all/rollback.yaml
+#
+# rollback_on_failure
+#   true  - every deploy playbook saves the running configuration to
+#           rollback_file before it changes anything. If one of its deploy
+#           tasks fails, the switch is put back to that saved configuration
+#           with "configure replace", so none of that playbook's changes stay.
+#           Changes made by earlier playbooks in the run are kept.
+#   false - no rollback point is saved; a failed deploy leaves the changes
+#           made before the failing task on the switch.
+#   Test it in the lab first. One run can also turn it on or off with
+#   -e rollback_on_failure=true / false.
+#
+# rollback_file
+#   Where the rollback point is saved on the switch. Overwritten by every
+#   deploy playbook. Use the switch's boot filesystem (flash: or bootflash:).
+#
+# Not undone by a rollback: things that are not configuration lines, such as
+# RSA keys, and the IBNS 2.0 "authentication convert-to new-style"
+# conversion, which is permanent.
+# =============================================================================
+
+rollback_on_failure: true
+rollback_file: "flash:ansible_rollback.cfg"
+revert_timer_minutes: 10

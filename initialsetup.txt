@@ -1,0 +1,35 @@
+# ===========================================================================================================================================
+# Go into your project folder. Everything after this happens there.
+cd /netauto-py
+
+
+# ===========================================================================================================================================
+# Create a virtual environment in a folder called ".venv".
+#   python3   -> the Python interpreter (3.12 in your container)
+#   -m venv   -> run Python's built-in "venv" module
+#   .venv     -> name of the folder to create (the dot hides it from plain "ls")
+#
+# Without one, pip install puts packages into the system’s Python, where every project shares them.
+# Two projects needing different versions of the same library would then break each other.
+# On Ubuntu 24.04, pip actually refuses to install into the system Python for exactly this reason.
+#
+# With .venv, each project gets its own private set of packages. It’s like the Ansible collections/ folder inside your Ansible repo, which pins the collections that one project uses.
+# Go into your project folder. Everything after this happens there
+
+python3 -m venv .venv
+
+# ===========================================================================================================================================
+# Switch this shell over to the virtual environment.
+# After this, "python" and "pip" mean the copies inside .venv, not the system ones.
+# Your prompt usually changes to start with "(.venv)" so you can tell.
+# activate only applies to the current shell. If you open a new terminal or restart the container, run source .venv/bin/activate again.
+# To leave the environment, type deactivate.
+# To check that it’s active, run which python. It should print /netauto-py/.venv/bin/python.
+
+source .venv/bin/activate
+
+# ===========================================================================================================================================
+# Download Netmiko from the internet (PyPI) and install it into .venv only.
+# pip also pulls in what Netmiko needs, such as paramiko for SSH.
+
+pip install netmiko
